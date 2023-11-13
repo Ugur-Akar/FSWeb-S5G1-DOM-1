@@ -43,3 +43,67 @@ console.log('Proje açıldı!')
 
 
 /* Kodlar Buradan aşağıya */
+const divContainer = document.body.children[0];
+
+const header = divContainer.children[0];
+const headerNav = header.children[0];
+
+for(let i = 0; i < headerNav.children.length; i++){
+  headerNav.children[i].textContent = siteContent["nav"]["nav-item-" + (i + 1)];
+  headerNav.children[i].setAttribute("class","italic");
+}
+
+const headerImg = header.children[1];
+headerImg.setAttribute("src", siteContent.images["logo-img"]);
+
+const ctaSection = divContainer.getElementsByClassName("cta")[0];
+const ctaHeader = ctaSection.children[0].children[0];
+const ctaButton = ctaSection.children[0].children[1];
+const ctaImg = ctaSection.children[1];
+
+ctaHeader.textContent = siteContent.cta.h1;
+ctaButton.textContent = siteContent.cta.button;
+ctaImg.setAttribute("src", siteContent.images["cta-img"]);
+
+const mainSection = divContainer.getElementsByClassName("main-content")[0];
+const textContainers =  mainSection.getElementsByClassName("text-content");
+const mainImg = mainSection.getElementsByTagName("img")[0];
+
+let h4Arr = new Array();
+let mainTextArr = new Array();
+for(let key in siteContent["ana-içerik"]){
+  if(key.includes("h4")){
+    h4Arr.push(siteContent["ana-içerik"][key]);
+  }
+  else{
+    mainTextArr.push(siteContent["ana-içerik"][key]);
+  }
+}
+
+for(let i = 0; i < textContainers.length; i++){
+  textContainers[i].children[0].textContent = h4Arr[i];
+  textContainers[i].children[1].textContent = mainTextArr[i];
+}
+
+mainImg.setAttribute("src", siteContent.images["accent-img"]);
+
+const contactSection = divContainer.getElementsByClassName("contact")[0];
+const contactHeader = contactSection.children[0];
+const contactParas = contactSection.getElementsByTagName("p");
+
+contactHeader.textContent = siteContent["iletisim"]["iletişim-h4"];
+let conArr = new Array();
+for(let key in siteContent["iletisim"]){
+  if(!key.includes("h4")){
+    conArr.push(siteContent["iletisim"][key]);
+  }
+}
+
+for(let i = 0; i < contactParas.length; i++){
+  contactParas[i].textContent = conArr[i];
+}
+
+const footer = divContainer.children[divContainer.children.length - 1];
+
+footer.children[0].textContent = siteContent["footer"]["copyright"];
+footer.children[0].setAttribute("class", "bold");
